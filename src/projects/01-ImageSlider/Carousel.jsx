@@ -15,8 +15,6 @@ const Carousel = () => {
   const changeImage = (nextIndex) => {
     console.log('set Image');
     let newIndex = index + nextIndex;
-    console.log(index, nextIndex, newIndex);
-    // let img = images[]
     if (newIndex < 0) {
       setImage(images[images.length - 1]);
       index = images.length - 1;
@@ -30,12 +28,12 @@ const Carousel = () => {
   };
 
   return (
-    <main className="Carousel">
+    <main className="carousel">
       <div className="title">
         <h1>Carousel : Image Slider</h1>
         <div className="underline"></div>
       </div>
-      <div className="section-center">
+      <div className="section-center carousel-center">
         <article className="image-slider">
           <button
             className="carousel-btn prev-btn"
@@ -43,7 +41,7 @@ const Carousel = () => {
               changeImage(-1);
             }}
           >
-            prev
+            ◀
           </button>
           <img src={image} alt="image" className="carousel-img" />
           <button
@@ -52,7 +50,7 @@ const Carousel = () => {
               changeImage(+1);
             }}
           >
-            next
+            ▶
           </button>
         </article>
       </div>
