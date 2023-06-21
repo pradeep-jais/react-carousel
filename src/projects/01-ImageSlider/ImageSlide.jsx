@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Carousel from './Carousel';
 
 let index = 0;
 
@@ -25,7 +24,17 @@ const ImageSlide = ({ images }) => {
   const goToImage = (index) => {
     setImage(images[index]);
   };
-
+  // Carousel more feature
+  useEffect(() => {
+    setInterval(() => {
+      index = index + 1;
+      if (index > images.length - 1) {
+        index = 0;
+      }
+      console.log(index);
+      setImage(images[index]);
+    }, 4000);
+  }, []);
   return (
     <>
       <article className="image-slider">
