@@ -253,7 +253,7 @@ alerts
   margin-top: -1.5rem;
 }
 .section-center {
-  width: 100vw;
+  width: 100%;
   margin: 0 auto;
   max-width: var(--max-width);
 }
@@ -301,4 +301,16 @@ alerts
 }
 .next-btn {
   right: 0.75rem;
+}
+.icon-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.icon-img {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
 }
