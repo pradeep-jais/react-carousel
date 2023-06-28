@@ -51,9 +51,14 @@ const ImageSlide = ({ images }) => {
         </button>
       </article>
       <div className="icon-container">
-        {images.map((image, index) => {
+        {images.map((image, i) => {
           return (
-            <div key={index} className="icon" onClick={() => setIndex(index)}>
+            <div
+              style={{ opacity: index === i ? '1' : '0.6' }}
+              key={i}
+              className="icon"
+              onClick={() => setIndex(index)}
+            >
               <img src={image} className="icon-img" />
             </div>
           );
