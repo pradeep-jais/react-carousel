@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 let index = 0;
-
 const ImageSlide = ({ images }) => {
   const [image, setImage] = useState(images[index]);
 
+  // prev and next button handle
   const changeImage = (nextIndex) => {
     // console.log(nextIndex, 'set Image');
 
@@ -24,17 +24,22 @@ const ImageSlide = ({ images }) => {
   const goToImage = (index) => {
     setImage(images[index]);
   };
-  // Carousel more feature
+  // Carousel more feature : change image after every 4s
   useEffect(() => {
-    setInterval(() => {
+    const id = setInterval(() => {
       index = index + 1;
       if (index > images.length - 1) {
         index = 0;
       }
-      console.log(index);
+
+      // console.log('render', index);
       setImage(images[index]);
     }, 4000);
-  }, []);
+
+    return () => {
+      clearInterval(id);
+    };
+  }, [images]);
   return (
     <>
       <article className="image-slider">
