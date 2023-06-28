@@ -1,40 +1,32 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-let index = 0;
 const ImageSlide = ({ images }) => {
-  const [image, setImage] = useState(images[index]);
+  const [index, setIndex] = useState(0);
 
   // prev and next button handle
-  const changeImage = (nextIndex) => {
-    // console.log(nextIndex, 'set Image');
-
-    let newIndex = index + nextIndex;
-    if (newIndex < 0) {
-      setImage(images[images.length - 1]);
-      index = images.length - 1;
-    } else if (newIndex > images.length - 1) {
-      setImage(images[0]);
-      index = 0;
+  const nextImage = () => {
+    console.log('next image render', index);
+    if (index === images.length - 1) {
+      setIndex(0);
     } else {
-      setImage(images[newIndex]);
-      index = newIndex;
+      setIndex(index + 1);
     }
   };
 
-  const goToImage = (index) => {
-    setImage(images[index]);
+  const prevImage = () => {
+    if (index === 0) {
+      setIndex(images.length - 1);
+    } else {
+      setIndex(index - 1);
+    }
   };
+
   // Carousel more feature : change image after every 4s
   useEffect(() => {
     const id = setInterval(() => {
-      index = index + 1;
-      if (index > images.length - 1) {
-        index = 0;
-      }
-
-      // console.log('render', index);
-      setImage(images[index]);
-    }, 4000);
+      nextImage();
+      console.log('render');
+    }, 3000);
 
     return () => {
       clearInterval(id);
@@ -43,28 +35,18 @@ const ImageSlide = ({ images }) => {
   return (
     <>
       <article className="image-slider">
-        <button
-          className="carousel-btn prev-btn"
-          onClick={() => {
-            changeImage(-1);
-          }}
-        >
+        <button className="carousel-btn prev-btn" onClick={prevImage}>
           ◀
         </button>
-        <img src={image} alt="image" className="carousel-img" />
-        <button
-          className="carousel-btn next-btn"
-          onClick={() => {
-            changeImage(+1);
-          }}
-        >
+        <img src={images[index]} alt="image" className="carousel-img" />
+        <button className="carousel-btn next-btn" onClick={nextImage}>
           ▶
         </button>
       </article>
       <div className="icon-container">
         {images.map((image, index) => {
           return (
-            <div key={index} className="icon" onClick={() => goToImage(index)}>
+            <div key={index} className="icon" onClick={() => setIndex(index)}>
               <img src={image} className="icon-img" />
             </div>
           );
