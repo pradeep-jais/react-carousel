@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const ImageSlide = ({ images }) => {
+  console.log(images);
   const [index, setIndex] = useState(0);
 
   // prev and next button handle
