@@ -24,7 +24,13 @@ const ImageSlide = ({ images }) => {
   // Carousel more feature : change image after every 4s
   useEffect(() => {
     const id = setInterval(() => {
-      nextImage();
+      setIndex((prevIndex) => {
+        const nextIndex = prevIndex + 1;
+        if (nextIndex > images.length - 1) {
+          return 0;
+        }
+        return nextIndex;
+      });
       console.log('render');
     }, 3000);
 
